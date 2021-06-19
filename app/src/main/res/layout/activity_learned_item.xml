@@ -8,7 +8,7 @@
     tools:context=".learned_item">
 
     <View
-        android:id="@+id/textView"
+        android:id="@+id/viewColor"
         android:layout_width="41dp"
         android:layout_height="0dp"
         android:background="@color/purple_200"
@@ -24,7 +24,7 @@
         android:layout_height="41dp"
         android:text="Simple title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/viewColor"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/texto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/viewColor"
         app:layout_constraintTop_toBottomOf="@+id/textTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

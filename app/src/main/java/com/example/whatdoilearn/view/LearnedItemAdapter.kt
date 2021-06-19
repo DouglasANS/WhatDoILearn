@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whatdoilearn.R
 import com.example.whatdoilearn.data.LearnedItem
+import com.example.whatdoilearn.data.UnderstandingLevel
 
 class LearnedItemAdapter: RecyclerView.Adapter<LearnedItemAdapter.LearnedItemViewHolder>() {
     var learnItems = listOf<LearnedItem>()
@@ -29,13 +30,27 @@ class LearnedItemAdapter: RecyclerView.Adapter<LearnedItemAdapter.LearnedItemVie
     }
 
     inner class LearnedItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        /*Pega as refecencias de um layoute manipula os elementos*/
+
+        /*Pega as refecencias de um layout manipula os elementos*/
         private val titleContainer: TextView = itemView.findViewById(R.id.textTitle)
         private val desciptionContainer: TextView = itemView.findViewById(R.id.textDescription)
+        private val level = itemView.findViewById(R.id.viewColor) as View
+
+
+
 
         fun bind(learnedItem: LearnedItem) {
             titleContainer.text = learnedItem.name
             desciptionContainer.text = learnedItem.description
+
+
+
+            when (learnedItem.understandingLevel){
+                UnderstandingLevel.LOW -> level.setBackgroundResource(R.color.red)
+                UnderstandingLevel.MEDIUM -> level.setBackgroundResource(R.color.yellow)
+                UnderstandingLevel.HIGH -> level.setBackgroundResource(R.color.green)
+            }
+
         }
 
     }
