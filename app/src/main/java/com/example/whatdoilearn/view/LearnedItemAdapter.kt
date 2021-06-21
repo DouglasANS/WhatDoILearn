@@ -12,9 +12,31 @@ import com.example.whatdoilearn.data.UnderstandingLevel
 class LearnedItemAdapter: RecyclerView.Adapter<LearnedItemAdapter.LearnedItemViewHolder>() {
     var learnItems = listOf<LearnedItem>()
 
+    /*LearnedItemViewHolder é a view referenciada. Ele é uma view Criada/Nova tipo TextView,Button*/
+    inner class LearnedItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+
+        /*Pega as refecencias de um layout manipula os elementos*/
+        private val titleContainer: TextView = itemView.findViewById(R.id.textTitle)
+        private val desciptionContainer: TextView = itemView.findViewById(R.id.textDescription)
+        private val level = itemView.findViewById(R.id.viewColor) as View
+
+        fun bind(learnedItem: LearnedItem) { /*Trata Informações do banco de dados*/
+            titleContainer.text = learnedItem.name
+            desciptionContainer.text = learnedItem.description
+
+
+            when (learnedItem.understandingLevel){
+                UnderstandingLevel.LOW -> level.setBackgroundResource(R.color.red)
+                UnderstandingLevel.MEDIUM -> level.setBackgroundResource(R.color.yellow)
+                UnderstandingLevel.HIGH -> level.setBackgroundResource(R.color.green)
+            }
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LearnedItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.activity_learned_item, parent,false)
+        /*O inflate que cria a view nova*/
 
         return LearnedItemViewHolder(view)
     }
@@ -28,31 +50,4 @@ class LearnedItemAdapter: RecyclerView.Adapter<LearnedItemAdapter.LearnedItemVie
     override fun getItemCount(): Int {
         return learnItems.size /*Conta quantos itens renderizados*/
     }
-
-    inner class LearnedItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-
-        /*Pega as refecencias de um layout manipula os elementos*/
-        private val titleContainer: TextView = itemView.findViewById(R.id.textTitle)
-        private val desciptionContainer: TextView = itemView.findViewById(R.id.textDescription)
-        private val level = itemView.findViewById(R.id.viewColor) as View
-
-
-
-
-        fun bind(learnedItem: LearnedItem) {
-            titleContainer.text = learnedItem.name
-            desciptionContainer.text = learnedItem.description
-
-
-
-            when (learnedItem.understandingLevel){
-                UnderstandingLevel.LOW -> level.setBackgroundResource(R.color.red)
-                UnderstandingLevel.MEDIUM -> level.setBackgroundResource(R.color.yellow)
-                UnderstandingLevel.HIGH -> level.setBackgroundResource(R.color.green)
-            }
-
-        }
-
-    }
-
 }
