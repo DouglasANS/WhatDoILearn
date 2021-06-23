@@ -1,4 +1,4 @@
-package com.example.whatdoilearn.data
+package com.example.whatdoilearn.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

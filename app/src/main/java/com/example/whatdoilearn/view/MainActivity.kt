@@ -1,11 +1,11 @@
-package com.example.whatdoilearn
+package com.example.whatdoilearn.view
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.whatdoilearn.data.LearnItemDatabase
+import androidx.lifecycle.Observer
+import com.example.whatdoilearn.WhatDidILearnApplication
 import com.example.whatdoilearn.databinding.ActivityMainBinding
-import com.example.whatdoilearn.view.LearnedItemAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,19 +16,27 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val recyclerView = binding.learnedItensRecyclerView
+        val adapter = LearnedItemAdapter()
+        recyclerView.adapter = adapter
+
+        val repository = (application as WhatDidILearnApplication).repository
+        val items = repository.learnedItems
+
+        items.observe(this, Observer {
+            adapter.learnItems = it
+        })
+            /*Conector a tomada no adaptador juntou*/
+
         val adicionar = binding.floatingActionButton
 
-        val recycler = binding.learnedItensRecyclerView
-        val adapter = LearnedItemAdapter()
-
-        adapter.learnItems = LearnItemDatabase.getAll()
-        recycler.adapter = adapter
-
         adicionar.setOnClickListener {
+
             val i = Intent(this, new_Learned_item::class.java)
             startActivity(i)
         }
 
-        /*Conector a tomada no adaptador juntou*/
+
+
     }
 }

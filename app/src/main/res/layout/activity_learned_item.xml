@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="24sp"
-    tools:context=".learned_item">
+    tools:context=".view.learned_item">
 
     <View
         android:id="@+id/viewColor"

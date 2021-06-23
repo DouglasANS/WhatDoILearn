@@ -1,4 +1,4 @@
-package com.example.whatdoilearn.data
+package com.example.whatdoilearn.entities
 
 import com.example.whatdoilearn.R
 

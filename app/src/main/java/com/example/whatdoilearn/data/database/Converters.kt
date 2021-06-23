@@ -1,7 +1,7 @@
-package com.example.whatdoilearn.data
+package com.example.whatdoilearn.data.database
 
 import androidx.room.TypeConverter
-import com.example.whatdoilearn.R
+import com.example.whatdoilearn.entities.UnderstandingLevel
 
 class Converters {
     @TypeConverter
@@ -10,7 +10,7 @@ class Converters {
     }
 
     @TypeConverter
-    fun intToLevel(int: Int): UnderstandingLevel{
+    fun intToLevel(int: Int): UnderstandingLevel {
         return when(int){
             UnderstandingLevel.LOW.ordinal -> UnderstandingLevel.LOW
             UnderstandingLevel.MEDIUM.ordinal -> UnderstandingLevel.MEDIUM

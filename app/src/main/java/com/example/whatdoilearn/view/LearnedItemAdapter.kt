@@ -6,11 +6,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whatdoilearn.R
-import com.example.whatdoilearn.data.LearnedItem
-import com.example.whatdoilearn.data.UnderstandingLevel
+import com.example.whatdoilearn.entities.LearnedItem
+import com.example.whatdoilearn.entities.UnderstandingLevel
 
 class LearnedItemAdapter: RecyclerView.Adapter<LearnedItemAdapter.LearnedItemViewHolder>() {
     var learnItems = listOf<LearnedItem>()
+    set(value){
+        field = value
+        notifyDataSetChanged()
+    }
 
     /*LearnedItemViewHolder é a view referenciada. Ele é uma view Criada/Nova tipo TextView,Button*/
     inner class LearnedItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -24,7 +28,6 @@ class LearnedItemAdapter: RecyclerView.Adapter<LearnedItemAdapter.LearnedItemVie
             titleContainer.text = learnedItem.name
             desciptionContainer.text = learnedItem.description
 
-
             when (learnedItem.understandingLevel){
                 UnderstandingLevel.LOW -> level.setBackgroundResource(R.color.red)
                 UnderstandingLevel.MEDIUM -> level.setBackgroundResource(R.color.yellow)
@@ -36,18 +39,20 @@ class LearnedItemAdapter: RecyclerView.Adapter<LearnedItemAdapter.LearnedItemVie
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LearnedItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.activity_learned_item, parent,false)
-        /*O inflate que cria a view nova*/
+        /*O inflate que cria a view nova - se quiser fazer uma view a partir de um fragment/activity usa o inflater  */
+        /*O onCreateViewHolder é quem escolhe qual tela/view vai ser o modelo de renderização*/
 
         return LearnedItemViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: LearnedItemViewHolder, position: Int) {
         /*holder sabe qual layout vai trabalhar*/
+        /*O holder pega a tela criada e com os dados inseridos faz a renderização com base na posição */
         val learnedItem = learnItems[position]
         holder.bind(learnedItem)
     }
 
     override fun getItemCount(): Int {
-        return learnItems.size /*Conta quantos itens renderizados*/
+        return learnItems.size /*Conta quantos itens serão renderizados*/
     }
 }
